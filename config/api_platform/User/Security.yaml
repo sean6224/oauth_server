@@ -1,0 +1,137 @@
+resources:
+    # Resource dedicated to user security operations
+    App\Domain\User\Entity\Security:
+        shortName: 'User Security'
+        operations:
+            # Endpoint for generating security codes for various purposes
+            - class: 'ApiPlatform\Metadata\Post'
+              uriTemplate: '/v1/security/code/generate/{uuid}'
+              input: 'App\Application\DTO\Security\Input\GenerateSecurityCodeInput'
+              provider: 'App\Infrastructure\User\State\Provider\UserProvider'
+              processor: 'App\Infrastructure\User\State\Processor\Security\GenerateCodeProcessor'
+              output: false
+              validate: true
+              status: 202
+              openapiContext:
+                  summary: 'Endpoint for generating security codes for various purposes.'
+                  description: 'Generates security codes for users, used for authentication, email verification, password reset, etc.'
+                  responses:
+                      202:
+                          description: 'The request for generating a security code has been accepted.'
+                      400:
+                          description: 'Invalid data format.'
+                      404:
+                          description: 'User not found.'
+                      500:
+                          description: 'Internal server error.'
+            # Endpoint for used security codes for various purposes
+            - class: 'ApiPlatform\Metadata\Post'
+              uriTemplate: '/v1/security/code/used/{uuid}'
+              input: 'App\Application\DTO\Security\Input\CodeUsedInput'
+              provider: 'App\Infrastructure\User\State\Provider\UserProvider'
+              processor: 'App\Infrastructure\User\State\Processor\Security\CodeUsedProcessor'
+              output: false
+              validate: true
+              status: 202
+              openapiContext:
+                  summary: 'Endpoint for marking security codes as used for various purposes.'
+                  description: 'Marks security codes as used, such as for authentication, email verification, password reset, etc.'
+                  responses:
+                      202:
+                          description: 'The request to mark the security code as used has been accepted.'
+                      400:
+                          description: 'Invalid data format.'
+                      404:
+                          description: 'User not found.'
+                      500:
+                          description: 'Internal server error.'
+            # Endpoint for security codes for invalidating
+            - class: 'ApiPlatform\Metadata\Post'
+              uriTemplate: '/v1/security/code/invalidate/{uuid}'
+              input: 'App\Application\DTO\Security\Input\InvalidateCodeInput'
+              provider: 'App\Infrastructure\User\State\Provider\UserProvider'
+              processor: 'App\Infrastructure\User\State\Processor\Security\InvalidCodeProcessor'
+              output: false
+              validate: true
+              status: 202
+              openapiContext:
+                  summary: 'Endpoint for invalidating security codes for various purposes.'
+                  description: 'Marks security codes as invalid including for authentication, email verification, password reset, etc.'
+                  responses:
+                      202:
+                          description: 'The request to invalidate the security code has been accepted.'
+                      400:
+                          description: 'Invalid data format provided.'
+                      404:
+                          description: 'User not found.'
+                      500:
+                          description: 'Internal server error.'
+            # Endpoint for retrieving user security codes
+            - class: 'ApiPlatform\Metadata\Get'
+              uriTemplate: '/v1/security/code/{uuid}'
+              provider: 'App\Infrastructure\User\State\Provider\SecurityProvider'
+              output: 'App\Application\DTO\Security\Output\SecurityView'
+              normalization_context:
+                  groups: [ 'read' ]
+              validate: true
+              status: 200
+              openapiContext:
+                  summary: 'Endpoint for retrieving user security codes.'
+                  description: 'Retrieves security codes associated with the user for various purposes such as authentication, email verification, password reset, etc.'
+                  parameters:
+                      - name: purpose
+                        in: query
+                        required: true
+                        schema:
+                            type: string
+                        description: 'The purpose of the security entity'
+                  responses:
+                      200:
+                          description: 'The user security codes have been successfully retrieved.'
+                      400:
+                          description: 'Invalid data format provided.'
+                      404:
+                          description: 'User not found.'
+                      500:
+                          description: 'Internal server error.'
+            # Endpoint for download security codes user
+            - class: 'ApiPlatform\Metadata\Post'
+              uriTemplate: '/v1/security/code/download/{uuid}'
+              input: 'App\Application\DTO\Security\Input\InvalidateCodeInput'
+              provider: 'App\Infrastructure\User\State\Provider\UserProvider'
+              processor: 'App\Infrastructure\User\State\Processor\Security\DownloadCodeProcessor'
+              output: false
+              validate: true
+              status: 202
+              openapiContext:
+                  summary: 'Endpoint for downloading security codes as PDF.'
+                  description: 'Provides security codes in PDF format for various purposes including authentication, email verification, password reset, etc.'
+                  responses:
+                      202:
+                          description: 'The PDF with security codes has been successfully generated and downloaded.'
+                      400:
+                          description: 'Invalid data format provided.'
+                      404:
+                          description: 'User not found.'
+                      500:
+                          description: 'Internal server error.'
+            # Endpoint for resetting user passwords
+            - class: 'ApiPlatform\Metadata\Post'
+              uriTemplate: '/v1/security/reset-password'
+              input: 'App\Application\UseCase\Command\User\Security\ResetPassword\ResetPasswordInput'
+              processor: 'App\Infrastructure\User\State\Processor\Security\ResetPasswordProcessor'
+              output: false
+              validate: true
+              status: 202
+              openapiContext:
+                  summary: 'Endpoint for resetting users password.'
+                  description: 'Allows resetting password by generating new one or by sending security code.'
+                  responses:
+                      202:
+                          description: 'Password reset request has been accepted.'
+                      400:
+                          description: 'Invalid data format.'
+                      404:
+                          description: 'User not found.'
+                      500:
+                          description: 'Internal server error.'

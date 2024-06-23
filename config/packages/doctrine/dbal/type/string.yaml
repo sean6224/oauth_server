@@ -1,0 +1,19 @@
+doctrine:
+    dbal:
+        types:
+            email: App\Infrastructure\Shared\Doctrine\EmailType
+            hashed_password: App\Infrastructure\Shared\Doctrine\HashedPasswordType
+            username: App\Infrastructure\User\Doctrine\Type\UserNameType
+            # Security
+            code: App\Infrastructure\User\Doctrine\Type\Security\CodeType
+            purpose: App\Infrastructure\User\Doctrine\Type\Security\PurposeType
+            status: App\Infrastructure\User\Doctrine\Type\Security\StatusType
+        mapping_types:
+            email: string
+            hashed_password: string
+            username: string 
+            # Security
+            code: string
+            purpose: string
+            status: string
+    

@@ -1,0 +1,28 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    _instanceof:
+        App\Infrastructure\Shared\Bus\Command\CommandHandlerInterface:
+            public: true
+            tags:
+                - { name: messenger.message_handler, bus: messenger.bus.command }
+        
+        App\Infrastructure\Shared\Bus\Query\QueryHandlerInterface:
+            public: true
+            tags:
+                - { name: messenger.message_handler, bus: messenger.bus.query }
+        
+        App\Infrastructure\Shared\Bus\Event\EventHandlerInterface:
+            public: true
+            tags:
+                - { name: messenger.message_handler, bus: messenger.bus.event.async }
+
+    # Common
+    App\:
+        resource: '../src/*'
+        exclude:
+            - '../src/Domain/*/Exception/*'
+            - '../src/Infrastructure/Kernel.php'
+            - '../src/Infrastructure/Shared/Migrations'

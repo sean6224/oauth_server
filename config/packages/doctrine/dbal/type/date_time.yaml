@@ -1,0 +1,4 @@
+doctrine:
+  dbal:
+    types:
+      datetime_immutable: App\Infrastructure\Shared\Doctrine\DateTimeType

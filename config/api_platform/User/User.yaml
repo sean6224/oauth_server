@@ -1,0 +1,118 @@
+resources:
+    App\Domain\User\Entity\User:
+        shortName: 'User Account'
+        operations:
+            # Registration Operations
+            -   class: 'ApiPlatform\Metadata\Post'
+                uriTemplate: '/v1/user/register'
+                input: 'App\Application\Dto\User\Input\SignUpInput'
+                processor: 'App\Infrastructure\User\State\Processor\SignUpProcessor'
+                output: false
+                validate: false
+                status: 202
+                openapiContext:
+                    summary: 'User registration endpoint to create new account.'
+                    description: 'This endpoint allows new users to register by providing username, email, and password.
+                        Users need to submit valid email address and unique username. 
+                        Passwords should meet the specified security requirements.'
+                    responses:
+                        202:
+                            description: 'The registration request has been accepted and will be processed later.'
+                        400:
+                            description: 'Invalid input. Check the format of the provided data.'
+            # Login Operations
+            -   class: 'ApiPlatform\Metadata\Post'
+                uriTemplate: '/v1/user/login'
+                input: 'App\Application\Dto\User\Input\SignInInput'
+                processor: 'App\Infrastructure\User\State\Processor\SignInProcessor'
+                output: false
+                validate: false
+                status: 202
+                openapiContext:
+                    summary: 'User login endpoint for authenticating with email and password.'
+                    description: 'This endpoint allows existing users to log in by providing their credentials.
+                        Users need to submit their email and password to authenticate.
+                        If the login is successful, a session token will be returned.'
+                    responses:
+                        200:
+                            description: 'Login successful. The session token has been issued.'
+                        401:
+                            description: 'Unauthorized. Check your login credentials.'                     
+            # Logout Operations
+            -   class: 'ApiPlatform\Metadata\Delete'
+                uriTemplate: '/v1/user/Logout/{uuid}'
+                provider: 'App\Infrastructure\User\State\Provider\UserProvider'
+                processor: 'App\Infrastructure\User\State\Processor\LogoutProcessor'
+                output: false
+                validate: false
+                status: 202
+                openapiContext:
+                    summary: 'Endpoint for logging out user.'
+                    description: 'This endpoint allows existing users to log out of system.
+                        Upon successful logout, the session token will be invalidated, effectively ending the session.
+                        Users will need to log in again to regain access.'
+                    responses:
+                        202:
+                            description: 'Logout request has been accepted. The session token has been invalidated.'
+                        401:
+                            description: 'Unauthorized. You need to be logged in to log out.'
+
+                            
+            # Email Change Operations 
+            -   class: 'ApiPlatform\Metadata\Post'
+                uriTemplate: '/v1/user/ChangeEmail/{uuid}'
+                input: 'App\Application\Dto\User\Input\ChangeEmailInput'
+                provider: 'App\Infrastructure\User\State\Provider\UserProvider'
+                processor: 'App\Infrastructure\User\State\Processor\Settings\ChangeEmailProcessor'
+                output: false
+                validate: false
+                status: 202
+                openapiContext:
+                    summary: 'Endpoint for changing the email address of an existing user.'
+                    description: 'This endpoint allows users to change their email address.
+                        Users need to provide the new email address in valid format.
+                        The change request will be processed asynchronously.'
+                    responses:
+                        202:
+                            description: 'Email change request has been accepted and will be processed later.'
+                        400:
+                            description: 'Invalid input. Check the provided email address.'
+            # User Change Status Operations 
+            -   class: 'ApiPlatform\Metadata\Post'
+                uriTemplate: '/v1/user/change-status/{uuid}'
+                input: 'App\Application\Dto\User\Input\ChangeStatusInput'
+                provider: 'App\Infrastructure\User\State\Provider\UserProvider'
+                processor: 'App\Infrastructure\User\State\Processor\Settings\ChangeStatusProcessor'
+                output: false
+                validate: false
+                status: 202
+                openapiContext:
+                    summary: 'Endpoint for changing the status of an existing user.'
+                    description: 'This endpoint allows changing the status of an existing user.
+                        The request will be processed asynchronously. You can change users status to "active", "suspended", or "deleted".'
+                    responses:
+                        202:
+                            description: 'User status change request has been accepted and will be processed later.'
+                        400:
+                            description: 'Invalid input. Please check the provided user ID or status value.'
+                        404:
+                            description: 'User not found. The provided user ID does not exist.'
+                            
+            # User data display operation
+            -   class: 'ApiPlatform\Metadata\Get'
+                uriTemplate: '/v1/user/{uuid}'
+                provider: 'App\Infrastructure\User\State\Provider\UserProvider'
+                output: 'App\Application\Dto\User\Output\UserView'
+                validate: false
+                status: 202
+                openapiContext:
+                    summary: 'Endpoint for retrieving user information by UUID.'
+                    description: 'This endpoint allows you to fetch details of a user by their UUID.
+                    The request will return user information such as UUID, username, and email.'
+                    responses:
+                        202:
+                            description: 'User information retrieval request has been accepted and is being processed.'
+                        400:
+                            description: 'Invalid input. Please check the provided UUID.'
+                        404:
+                            description: 'User not found. The provided UUID does not exist.'
