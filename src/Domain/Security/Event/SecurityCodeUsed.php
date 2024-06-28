@@ -2,10 +2,10 @@
 declare(strict_types=1);
 namespace App\Domain\Security\Event;
 
+use App\Domain\Security\ValueObject\Status;
 use App\Domain\Shared\Event\DomainEventInterface;
 use App\Domain\Shared\Exception\DateTimeException;
 use App\Domain\Shared\ValueObject\DateTime;
-use App\Domain\User\ValueObject\Security\Code\Status;
 
 /**
  * Represents the event of security code being used.

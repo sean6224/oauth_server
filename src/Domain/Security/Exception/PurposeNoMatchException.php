@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Domain\Security\Exception;
 
-use App\Domain\User\ValueObject\Security\Purpose;
+use App\Domain\Security\ValueObject\Purpose;
 use InvalidArgumentException;
 
 class PurposeNoMatchException extends InvalidArgumentException
