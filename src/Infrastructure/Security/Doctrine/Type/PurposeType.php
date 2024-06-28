@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace App\Infrastructure\User\Doctrine\Type\Security;
+namespace App\Infrastructure\Security\Doctrine\Type;
 
 use App\Domain\Security\ValueObject\Purpose;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
