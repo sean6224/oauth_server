@@ -2,10 +2,10 @@
 declare(strict_types=1);
 namespace App\Application\Message\Query\Security\DownloadCodePdf;
 
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use App\Domain\User\Repository\Security\FindNonInvalidatedByUserUuidInterface;
+use App\Domain\Security\Exception\InvalidateCodeException;
+use App\Domain\Security\Repository\FindNonInvalidatedByUserUuidInterface;
 use App\Infrastructure\Shared\Service\PdfService;
-use App\Domain\User\Exception\SecurityRoot\InvalidateCodeException;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
