@@ -2,8 +2,8 @@
 declare(strict_types=1);
 namespace App\Application\Message\Query\Security\FindSecurityByUser;
 
-use App\Domain\User\Entity\Security;
-use App\Infrastructure\User\Repository\Security\MysqlReadModelSecurityRepository;
+use App\Domain\Security\Entity\Security;
+use App\Infrastructure\Security\Repository\MysqlReadModelSecurityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 

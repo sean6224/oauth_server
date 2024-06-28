@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Application\Message\Query\Security\FindSecurityByUser;
 
-use App\Domain\User\ValueObject\Security\Purpose;
+use App\Domain\Security\ValueObject\Purpose;
 use App\Infrastructure\Shared\Bus\Query\QueryInterface;
 use Ramsey\Uuid\UuidInterface;
 
