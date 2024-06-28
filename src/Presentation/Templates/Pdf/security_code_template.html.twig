@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization codes - pdf</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: #E49857;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #171616;
+            padding: 20px;
+            border-radius: 0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #C5C5C5;
+        }
+
+        .content {
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 16px;
+            color: #C5C5C5;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .code-list {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            column-count: 2;
+            column-gap: 20px;
+            list-style-type: none;
+        }
+
+        .code-list li {
+            position: relative;
+            background-color: #212529;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+            border: 1px solid #E49857;
+        }
+
+        .code-list li:hover {
+            transform: translateY(-3px);
+        }
+
+        .code-list li.used {
+            opacity: 0.5;
+            text-decoration: line-through;
+            border: 1px solid #f24e4e;
+        }
+
+        .code-list li.used::before {
+            content: "Used";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #f24e4e;
+            color: #C5C5C5;
+            font-size: 12px;
+            padding: 5px;
+            border-radius: 0 0 0 4px;
+        }
+
+        .code-list li.active::before {
+            content: "active";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #E49857;
+            color: #C5C5C5;
+            font-size: 12px;
+            padding: 5px;
+            border-radius: 0 0 0 4px;
+        }
+
+        .label {
+            display: flex;
+            align-items: center;
+            color: #C5C5C5;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .label span {
+            color: #E49857;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 24px;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .footer {
+            text-align: center;
+            color: #888;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <p>Greeting, [Username]</p>
+        <p>These codes allow you to log into your account in case you forget your email,</p>
+        <p>passwords by entering only one of these codes - protect it like password.</p>
+        <p class="label"><span>|</span>Do not share them with anyone and keep them in safe place.</p>
+        <ul class="code-list">
+            {% for code in codes %}
+                <li class="{{ code.status == 'used' ? 'used' : 'active' }}">
+                    {{ code.code }}
+                </li>
+            {% endfor %}
+        </ul>
+        <p class="label"><span>|</span>
+            Each code can be used only once! All previous codes will no longer work!
+            <br>
+            All codes are invalidated after one month and re-generated for security purposes
+        </p>
+    </div>
+    <div class="footer">
+        <p>
+            If you need help, please visit
+            <a href="#">
+                help_link
+            </a>
+        </p>
+        <p>&copy; 2023, {company_name}, Inc. All rights reserved. {company_name}, the {company_name} logo, and the {company_name} Store logo are trademarks or registered trademarks of {company_name}, Inc. All other trademarks are the property of their respective owners.</p>
+        <p><a href="#terms_of_service">terms_of_service</a> | <a href="#privacy_policy">privacy_policy</a></p>
+    </div>
+</div>
+</body>
+</html>
