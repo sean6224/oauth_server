@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Application\Message\Command\Security\InvalidateCode;
 
-use App\Domain\User\ValueObject\Security\Purpose;
+use App\Domain\Security\ValueObject\Purpose;
 use App\Infrastructure\Shared\Bus\Command\CommandInterface;
 use Ramsey\Uuid\UuidInterface;
 
