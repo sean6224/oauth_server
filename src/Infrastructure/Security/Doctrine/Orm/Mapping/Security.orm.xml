@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Domain\Security\Entity\Security" table="security">
+        <id name="uuid" type="uuid" column="uuid"/>
+        <field name="userUuid" type="uuid" column="user_uuid"/>
+        <field name="purposeCode" type="purpose" column="purpose_code" />
+        <field name="createdAt" column="created_at" type="datetime_immutable" />
+        <field name="expirationAt" column="expiration_at" nullable="true" type="datetime_immutable" />
+        <field name="invalidateAt" column="invalidate_at" nullable="true" type="datetime_immutable" />
+        <one-to-many field="securityCodes" target-entity="App\Domain\Security\Entity\SecurityCode" mapped-by="security">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Domain\Security\Entity\SecurityCode" table="security_code">
+        <id name="uuid" type="uuid" column="uuid"/>
+        <many-to-one field="security" target-entity="App\Domain\Security\Entity\Security" inversed-by="securityCodes">
+            <join-column name="eventUuid" referenced-column-name="uuid" nullable="false" />
+        </many-to-one>
+        <field name="code" type="code" />
+        <field name="status" type="status" length="10"/>
+        <field name="usedAt" column="used_at" nullable="true" type="datetime_immutable" />
+    </entity>
+</doctrine-mapping>
