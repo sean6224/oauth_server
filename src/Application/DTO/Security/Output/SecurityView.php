@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Application\DTO\Security\Output;
 
-use App\Domain\User\Entity\Security;
+use App\Domain\Security\Entity\Security;
 use App\Infrastructure\Shared\Bridge\ApiPlatform\DataTransformer\AbstractView;
 use DateTimeInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
