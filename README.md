@@ -1,8 +1,15 @@
-# Symfony OAuth2 Server
+# Symfony OAuth2 Server - In a week there will be a stable version and the Run version will be from 29.06.2024
 
 ## Project Description
 
 This project is an OAuth2 server built using the Symfony framework. It uses the CQRS (Command Query Responsibility Segregation) pattern, DDD (Domain-Driven Design), API Platform, and PostgreSQL database. The goal of this project is to provide a secure and scalable authorization and authentication service for web and mobile applications.
+
+# Symfony OAuth2 Server—Version History
+
+| Version | Coding Name | Release Date | Notes                     |
+|---------|-------------|--------------|---------------------------|
+| 0.9     | BetaWave    | 29.06.2024   | Initial release candidate |
+| 1.0     | TBD         | TBD          | Stable release            |
 
 ## Requirements
 
@@ -88,7 +95,7 @@ This project is an OAuth2 server built using the Symfony framework. It uses the 
 
 7. **Accessing Services**
    - Api https://oauth.needrise.localhost
-   - Treafik https://traefik.needrise.localhost
+   - Treatise https://traefik.needrise.localhost
 
 ## Contributing
 
