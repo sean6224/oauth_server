@@ -1,4 +1,4 @@
-# Symfony OAuth2 Server - In a week there will be a stable version and the Run version will be from 29.06.2024
+# Symfony OAuth2 Server - In a week there will be a stable version
 
 ## Project Description
 
