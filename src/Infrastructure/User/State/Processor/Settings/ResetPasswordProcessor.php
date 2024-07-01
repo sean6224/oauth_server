@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
-namespace App\Infrastructure\User\State\Processor\Security;
+namespace App\Infrastructure\User\State\Processor\Settings;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use App\Application\UseCase\Command\User\ResetPassword\ResetPasswordCommand;
+use App\Application\Message\Command\User\ResetPassword\ResetPasswordCommand;
 use App\Infrastructure\Shared\Bus\Command\CommandBus;
 use Throwable;
 
@@ -40,7 +40,7 @@ final readonly class ResetPasswordProcessor implements ProcessorInterface
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): void
     {
         $this->bus->handle(
-            new ResetPasswordCommand($data->email, $data->codeSecurity)
+            new ResetPasswordCommand($data->email, $data->codeSecurity, $data->newPassword)
         );
     }
 }
