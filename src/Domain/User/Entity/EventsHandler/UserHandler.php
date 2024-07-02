@@ -39,11 +39,7 @@ use Webmozart\Assert\Assert;
 class UserHandler
 {
     /**
-     * Handles the user creation event.
-     *
-     * @param UserWasCreated $event The event triggered when a user is created.
-     * @param User $user The user entity to apply the event to.
-     * @throws DateTimeException If there is an issue with the date-time handling.
+     * @throws DateTimeException
      */
     public function userWasCreated(UserWasCreated $event, User $user): void
     {
